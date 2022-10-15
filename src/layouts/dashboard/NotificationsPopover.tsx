@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { set, sub } from 'date-fns';
 import { noCase } from 'change-case';
 import { faker } from '@faker-js/faker';
@@ -25,10 +24,12 @@ import { fToNow } from '../../utils/formatTime';
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import MenuPopover from '../../components/MenuPopover';
+// eslint-disable-next-line
+import { NotificationItemProps } from 'src/types/notifiaction';
 
 // ----------------------------------------------------------------------
 
-const NOTIFICATIONS = [
+const NOTIFICATIONS: NotificationItemProps[] = [
   {
     id: faker.datatype.uuid(),
     title: 'Your order is placed',
@@ -85,7 +86,7 @@ export default function NotificationsPopover() {
 
   const [open, setOpen] = useState(null);
 
-  const handleOpen = (event) => {
+  const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
   };
 
@@ -182,19 +183,7 @@ export default function NotificationsPopover() {
 
 // ----------------------------------------------------------------------
 
-NotificationItem.propTypes = {
-  notification: PropTypes.shape({
-    createdAt: PropTypes.instanceOf(Date),
-    id: PropTypes.string,
-    isUnRead: PropTypes.bool,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    type: PropTypes.string,
-    avatar: PropTypes.any,
-  }),
-};
-
-function NotificationItem({ notification }) {
+function NotificationItem({ notification }: { notification: NotificationItemProps }) {
   const { avatar, title } = renderContent(notification);
 
   return (
@@ -234,7 +223,7 @@ function NotificationItem({ notification }) {
 
 // ----------------------------------------------------------------------
 
-function renderContent(notification) {
+function renderContent(notification: NotificationItemProps) {
   const title = (
     <Typography variant="subtitle2">
       {notification.title}

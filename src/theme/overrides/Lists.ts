@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------
 
-export default function Lists(theme) {
+export default function Lists(theme: any) {
   return {
     MuiListItemIcon: {
       styleOverrides: {
