@@ -25,11 +25,11 @@ import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import MenuPopover from '../../components/MenuPopover';
 // eslint-disable-next-line
-import { NotificationItemProps } from 'src/types/notifiaction';
+import { INotificationItem } from 'src/types/notifiaction';
 
 // ----------------------------------------------------------------------
 
-const NOTIFICATIONS: NotificationItemProps[] = [
+const NOTIFICATIONS: INotificationItem[] = [
   {
     id: faker.datatype.uuid(),
     title: 'Your order is placed',
@@ -84,9 +84,9 @@ export default function NotificationsPopover() {
 
   const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
 
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState<any>(null);
 
-  const handleOpen = (event: any) => {
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setOpen(event.currentTarget);
   };
 
@@ -183,7 +183,7 @@ export default function NotificationsPopover() {
 
 // ----------------------------------------------------------------------
 
-function NotificationItem({ notification }: { notification: NotificationItemProps }) {
+function NotificationItem({ notification }: { notification: INotificationItem }) {
   const { avatar, title } = renderContent(notification);
 
   return (
@@ -223,7 +223,7 @@ function NotificationItem({ notification }: { notification: NotificationItemProp
 
 // ----------------------------------------------------------------------
 
-function renderContent(notification: NotificationItemProps) {
+function renderContent(notification: INotificationItem) {
   const title = (
     <Typography variant="subtitle2">
       {notification.title}

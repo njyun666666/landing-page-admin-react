@@ -7,6 +7,7 @@ import { Card, Stack, Divider, Checkbox, MenuItem, IconButton, CardHeader, FormC
 // components
 import Iconify from '../../../components/Iconify';
 import MenuPopover from '../../../components/MenuPopover';
+import { ITask } from 'src/types/task';
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +17,16 @@ AppTasks.propTypes = {
   list: PropTypes.array.isRequired,
 };
 
-export default function AppTasks({ title, subheader, list, ...other }) {
+export default function AppTasks({
+  title,
+  subheader,
+  list,
+  ...other
+}: {
+  title?: string;
+  subheader?: string;
+  list: ITask[];
+}) {
   const { control } = useForm({
     defaultValues: {
       taskCompleted: ['2'],
@@ -30,7 +40,7 @@ export default function AppTasks({ title, subheader, list, ...other }) {
         name="taskCompleted"
         control={control}
         render={({ field }) => {
-          const onSelected = (task) =>
+          const onSelected = (task: string) =>
             field.value.includes(task) ? field.value.filter((value) => value !== task) : [...field.value, task];
 
           return (
@@ -53,19 +63,27 @@ export default function AppTasks({ title, subheader, list, ...other }) {
 
 // ----------------------------------------------------------------------
 
-TaskItem.propTypes = {
-  checked: PropTypes.bool,
-  onChange: PropTypes.func,
-  task: PropTypes.shape({
-    id: PropTypes.string,
-    label: PropTypes.string,
-  }),
-};
+// TaskItem.propTypes = {
+//   checked: PropTypes.bool,
+//   onChange: PropTypes.func,
+//   task: PropTypes.shape({
+//     id: PropTypes.string,
+//     label: PropTypes.string,
+//   }),
+// };
 
-function TaskItem({ task, checked, onChange }) {
-  const [open, setOpen] = useState(null);
+function TaskItem({
+  task,
+  checked,
+  onChange,
+}: {
+  task: ITask;
+  checked: boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+}) {
+  const [open, setOpen] = useState<any>(null);
 
-  const handleOpenMenu = (event) => {
+  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setOpen(event.currentTarget);
   };
 
@@ -147,14 +165,24 @@ function TaskItem({ task, checked, onChange }) {
 
 // ----------------------------------------------------------------------
 
-MoreMenuButton.propTypes = {
-  actions: PropTypes.node.isRequired,
-  onClose: PropTypes.func,
-  onOpen: PropTypes.func,
-  open: PropTypes.bool,
-};
+// MoreMenuButton.propTypes = {
+//   actions: PropTypes.node.isRequired,
+//   onClose: PropTypes.func,
+//   onOpen: PropTypes.func,
+//   open: PropTypes.bool,
+// };
 
-function MoreMenuButton({ actions, open, onOpen, onClose }) {
+function MoreMenuButton({
+  actions,
+  open,
+  onOpen,
+  onClose,
+}: {
+  actions: React.ReactNode;
+  open: boolean;
+  onOpen: React.MouseEventHandler<HTMLButtonElement>;
+  onClose: any;
+}) {
   return (
     <>
       <IconButton size="large" color="inherit" sx={{ opacity: 0.48 }} onClick={onOpen}>

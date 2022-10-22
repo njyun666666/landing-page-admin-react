@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
 import ReactApexChart from 'react-apexcharts';
 // @mui
@@ -8,6 +7,8 @@ import { Card, CardHeader } from '@mui/material';
 import { fNumber } from '../../../utils/formatNumber';
 // components
 import { BaseOptionChart } from '../../../components/chart';
+import { ApexOptions } from 'apexcharts';
+import { IChartDataNumber } from 'src/types/chart';
 
 // ----------------------------------------------------------------------
 
@@ -32,14 +33,18 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-AppCurrentVisits.propTypes = {
-  title: PropTypes.string,
-  subheader: PropTypes.string,
-  chartColors: PropTypes.arrayOf(PropTypes.string),
-  chartData: PropTypes.array,
-};
-
-export default function AppCurrentVisits({ title, subheader, chartColors, chartData, ...other }) {
+export default function AppCurrentVisits({
+  title,
+  subheader,
+  chartColors,
+  chartData,
+  ...other
+}: {
+  title?: string;
+  subheader?: string;
+  chartColors?: string[];
+  chartData: IChartDataNumber[];
+}) {
   const theme = useTheme();
 
   const chartLabels = chartData.map((i) => i.label);
@@ -55,16 +60,16 @@ export default function AppCurrentVisits({ title, subheader, chartColors, chartD
     tooltip: {
       fillSeriesColor: false,
       y: {
-        formatter: (seriesName) => fNumber(seriesName),
+        formatter: (seriesName: number) => fNumber(seriesName),
         title: {
-          formatter: (seriesName) => `${seriesName}`,
+          formatter: (seriesName: string) => `${seriesName}`,
         },
       },
     },
     plotOptions: {
       pie: { donut: { labels: { show: false } } },
     },
-  });
+  }) as unknown as ApexOptions;
 
   return (
     <Card {...other}>

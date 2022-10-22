@@ -1,7 +1,7 @@
 // @mui
 import PropTypes from 'prop-types';
 import { alpha, styled } from '@mui/material/styles';
-import { Card, Typography } from '@mui/material';
+import { Card, SxProps, Theme, Typography } from '@mui/material';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
 // components
@@ -22,15 +22,20 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-AppWidgetSummary.propTypes = {
-  color: PropTypes.string,
-  icon: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  total: PropTypes.number.isRequired,
-  sx: PropTypes.object,
-};
-
-export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx, ...other }) {
+export default function AppWidgetSummary({
+  title,
+  total,
+  icon,
+  color = 'primary',
+  sx,
+  ...other
+}: {
+  title: string;
+  total: number;
+  icon?: string;
+  color?: string;
+  sx?: SxProps<Theme>;
+}) {
   return (
     <Card
       sx={{

@@ -3,16 +3,26 @@ import PropTypes from 'prop-types';
 import { Box, Card, Paper, Typography, CardHeader, CardContent } from '@mui/material';
 // utils
 import { fShortenNumber } from '../../../utils/formatNumber';
+import { ITraffic } from 'src/types/traffic';
 
 // ----------------------------------------------------------------------
 
-AppTrafficBySite.propTypes = {
-  title: PropTypes.string,
-  subheader: PropTypes.string,
-  list: PropTypes.array.isRequired,
-};
+// AppTrafficBySite.propTypes = {
+//   title: PropTypes.string,
+//   subheader: PropTypes.string,
+//   list: PropTypes.array.isRequired,
+// };
 
-export default function AppTrafficBySite({ title, subheader, list, ...other }) {
+export default function AppTrafficBySite({
+  title,
+  subheader,
+  list,
+  ...other
+}: {
+  title?: string;
+  subheader?: string;
+  list: ITraffic[];
+}) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />

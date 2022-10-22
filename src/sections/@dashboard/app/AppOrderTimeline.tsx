@@ -1,19 +1,28 @@
 // @mui
-import PropTypes from 'prop-types';
 import { Card, Typography, CardHeader, CardContent } from '@mui/material';
 import { Timeline, TimelineDot, TimelineItem, TimelineContent, TimelineSeparator, TimelineConnector } from '@mui/lab';
 // utils
 import { fDateTime } from '../../../utils/formatTime';
+import { IOrderItem } from 'src/types/order';
 
 // ----------------------------------------------------------------------
 
-AppOrderTimeline.propTypes = {
-  title: PropTypes.string,
-  subheader: PropTypes.string,
-  list: PropTypes.array.isRequired,
-};
+// AppOrderTimeline.propTypes = {
+//   title: PropTypes.string,
+//   subheader: PropTypes.string,
+//   list: PropTypes.array.isRequired,
+// };
 
-export default function AppOrderTimeline({ title, subheader, list, ...other }) {
+export default function AppOrderTimeline({
+  title,
+  subheader,
+  list,
+  ...other
+}: {
+  title?: string;
+  subheader?: string;
+  list: IOrderItem[];
+}) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -26,7 +35,7 @@ export default function AppOrderTimeline({ title, subheader, list, ...other }) {
         }}
       >
         <Timeline>
-          {list.map((item, index) => (
+          {list.map((item: IOrderItem, index: number) => (
             <OrderItem key={item.id} item={item} isLast={index === list.length - 1} />
           ))}
         </Timeline>
@@ -37,16 +46,16 @@ export default function AppOrderTimeline({ title, subheader, list, ...other }) {
 
 // ----------------------------------------------------------------------
 
-OrderItem.propTypes = {
-  isLast: PropTypes.bool,
-  item: PropTypes.shape({
-    time: PropTypes.instanceOf(Date),
-    title: PropTypes.string,
-    type: PropTypes.string,
-  }),
-};
+// OrderItem.propTypes = {
+//   isLast: PropTypes.bool,
+//   item: PropTypes.shape({
+//     time: PropTypes.instanceOf(Date),
+//     title: PropTypes.string,
+//     type: PropTypes.string,
+//   }),
+// };
 
-function OrderItem({ item, isLast }) {
+function OrderItem({ item, isLast }: { item: IOrderItem; isLast: boolean }) {
   const { type, title, time } = item;
   return (
     <TimelineItem>

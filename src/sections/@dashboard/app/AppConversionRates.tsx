@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
 import ReactApexChart from 'react-apexcharts';
 // @mui
@@ -7,16 +6,27 @@ import { Box, Card, CardHeader } from '@mui/material';
 import { fNumber } from '../../../utils/formatNumber';
 // components
 import { BaseOptionChart } from '../../../components/chart';
+import { IChartDataNumber } from 'src/types/chart';
+import { ApexOptions } from 'apexcharts';
 
 // ----------------------------------------------------------------------
 
-AppConversionRates.propTypes = {
-  title: PropTypes.string,
-  subheader: PropTypes.string,
-  chartData: PropTypes.array.isRequired,
-};
+// AppConversionRates.propTypes = {
+//   title: PropTypes.string,
+//   subheader: PropTypes.string,
+//   chartData: PropTypes.array.isRequired,
+// };
 
-export default function AppConversionRates({ title, subheader, chartData, ...other }) {
+export default function AppConversionRates({
+  title,
+  subheader,
+  chartData,
+  ...other
+}: {
+  title?: string;
+  subheader?: string;
+  chartData: IChartDataNumber[];
+}) {
   const chartLabels = chartData.map((i) => i.label);
 
   const chartSeries = chartData.map((i) => i.value);
@@ -25,7 +35,7 @@ export default function AppConversionRates({ title, subheader, chartData, ...oth
     tooltip: {
       marker: { show: false },
       y: {
-        formatter: (seriesName) => fNumber(seriesName),
+        formatter: (seriesName: number) => fNumber(seriesName),
         title: {
           formatter: () => '',
         },
@@ -37,7 +47,7 @@ export default function AppConversionRates({ title, subheader, chartData, ...oth
     xaxis: {
       categories: chartLabels,
     },
-  });
+  }) as unknown as ApexOptions;
 
   return (
     <Card {...other}>

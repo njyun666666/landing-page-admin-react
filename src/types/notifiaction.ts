@@ -1,4 +1,4 @@
-export interface NotificationItemProps {
+export interface INotificationItem {
   createdAt: Date;
   id: string;
   isUnRead: boolean;

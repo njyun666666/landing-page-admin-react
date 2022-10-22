@@ -35,7 +35,11 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function DashboardNavbar({ onOpenSidebar }: { onOpenSidebar: (...args: any[]) => any }) {
+export default function DashboardNavbar({
+  onOpenSidebar,
+}: {
+  onOpenSidebar: React.MouseEventHandler<HTMLButtonElement>;
+}) {
   return (
     <RootStyle>
       <ToolbarStyle>
