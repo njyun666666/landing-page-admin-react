@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { sample } from 'lodash';
-
+import { IUser } from 'src/types/user';
 // ----------------------------------------------------------------------
 
-const users = [...Array(24)].map((_, index) => ({
+const users: IUser[] = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
   avatarUrl: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,
   name: faker.name.findName(),
