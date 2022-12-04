@@ -1,10 +1,12 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // material
-import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
+import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel, SxProps, Theme } from '@mui/material';
+import { IUser } from 'src/types/user';
+import { ITableHeadLabel, TableOrder } from 'src/types/table';
 
 // ----------------------------------------------------------------------
 
-const visuallyHidden = {
+const visuallyHidden: SxProps<Theme> = {
   border: 0,
   margin: -1,
   padding: 0,
@@ -16,15 +18,15 @@ const visuallyHidden = {
   clip: 'rect(0 0 0 0)',
 };
 
-UserListHead.propTypes = {
-  order: PropTypes.oneOf(['asc', 'desc']),
-  orderBy: PropTypes.string,
-  rowCount: PropTypes.number,
-  headLabel: PropTypes.array,
-  numSelected: PropTypes.number,
-  onRequestSort: PropTypes.func,
-  onSelectAllClick: PropTypes.func,
-};
+// UserListHead.propTypes = {
+//   order: PropTypes.oneOf(['asc', 'desc']),
+//   orderBy: PropTypes.string,
+//   rowCount: PropTypes.number,
+//   headLabel: PropTypes.array,
+//   numSelected: PropTypes.number,
+//   onRequestSort: PropTypes.func,
+//   onSelectAllClick: PropTypes.func,
+// };
 
 export default function UserListHead({
   order,
@@ -34,8 +36,16 @@ export default function UserListHead({
   numSelected,
   onRequestSort,
   onSelectAllClick,
+}: {
+  order: TableOrder;
+  orderBy: string;
+  rowCount: number;
+  headLabel: ITableHeadLabel<IUser>[];
+  numSelected: number;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof IUser) => void;
+  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  const createSortHandler = (property) => (event) => {
+  const createSortHandler = (property: keyof IUser) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 
@@ -59,7 +69,7 @@ export default function UserListHead({
               hideSortIcon
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
+              onClick={createSortHandler(headCell.id as keyof IUser)}
             >
               {headCell.label}
               {orderBy === headCell.id ? (

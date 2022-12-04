@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // material
 import { styled } from '@mui/material/styles';
 import { Toolbar, Tooltip, IconButton, Typography, OutlinedInput, InputAdornment } from '@mui/material';
@@ -29,13 +29,21 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-UserListToolbar.propTypes = {
-  numSelected: PropTypes.number,
-  filterName: PropTypes.string,
-  onFilterName: PropTypes.func,
-};
+// UserListToolbar.propTypes = {
+//   numSelected: PropTypes.number,
+//   filterName: PropTypes.string,
+//   onFilterName: PropTypes.func,
+// };
 
-export default function UserListToolbar({ numSelected, filterName, onFilterName }) {
+export default function UserListToolbar({
+  numSelected,
+  filterName,
+  onFilterName,
+}: {
+  numSelected: number;
+  filterName: string;
+  onFilterName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
   return (
     <RootStyle
       sx={{

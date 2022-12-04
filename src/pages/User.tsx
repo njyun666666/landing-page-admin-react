@@ -28,10 +28,11 @@ import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashbo
 // mock
 import USERLIST from '../_mock/user';
 import { IUser } from 'src/types/user';
+import { ITableHeadLabel, TableOrder } from 'src/types/table';
 
 // ----------------------------------------------------------------------
 
-const TABLE_HEAD = [
+const TABLE_HEAD: ITableHeadLabel<IUser>[] = [
   { id: 'name', label: 'Name', alignRight: false },
   { id: 'company', label: 'Company', alignRight: false },
   { id: 'role', label: 'Role', alignRight: false },
@@ -52,10 +53,8 @@ function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   return 0;
 }
 
-type Order = 'asc' | 'desc';
-
 function getComparator<Key extends keyof any>(
-  order: Order,
+  order: TableOrder,
   orderBy: Key
 ): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
   return order === 'desc'
@@ -79,7 +78,7 @@ function applySortFilter<T>(array: IUser[], comparator: (a: T, b: T) => number, 
 export default function User() {
   const [page, setPage] = useState(0);
 
-  const [order, setOrder] = useState<Order>('asc');
+  const [order, setOrder] = useState<TableOrder>('asc');
 
   const [selected, setSelected] = useState<readonly string[]>([]);
 
