@@ -8,6 +8,7 @@ import { fCurrency } from '../../../utils/formatNumber';
 // components
 import Label from '../../../components/Label';
 import { ColorPreview } from '../../../components/color-utils';
+import { IProduct } from 'src/types/product';
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ ShopProductCard.propTypes = {
   product: PropTypes.object,
 };
 
-export default function ShopProductCard({ product }) {
+export default function ShopProductCard({ product }: { product: IProduct }) {
   const { name, cover, price, colors, status, priceSale } = product;
 
   return (

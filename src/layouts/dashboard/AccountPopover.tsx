@@ -35,7 +35,7 @@ export default function AccountPopover() {
 
   const [open, setOpen] = useState<any>(null);
 
-  const handleOpen = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setOpen(event.currentTarget);
   };
 

@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { sample } from 'lodash';
+import { IProduct } from 'src/types/product';
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +34,7 @@ const PRODUCT_COLOR = ['#00AB55', '#000000', '#FFFFFF', '#FFC0CB', '#FF4842', '#
 
 // ----------------------------------------------------------------------
 
-const products = [...Array(24)].map((_, index) => {
+const products: IProduct[] = [...Array(24)].map((_, index) => {
   const setIndex = index + 1;
 
   return {

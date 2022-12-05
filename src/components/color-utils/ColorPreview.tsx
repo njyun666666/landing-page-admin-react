@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
@@ -22,12 +22,12 @@ const IconStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-ColorPreview.propTypes = {
-  colors: PropTypes.array.isRequired,
-  limit: PropTypes.number,
-};
+// ColorPreview.propTypes = {
+//   colors: PropTypes.array.isRequired,
+//   limit: PropTypes.number,
+// };
 
-export default function ColorPreview({ colors, limit = 3, ...other }) {
+export default function ColorPreview({ colors, limit = 3, ...other }: { colors: string[]; limit?: number }) {
   const showColor = colors.slice(0, limit);
   const moreColor = colors.length - limit;
 

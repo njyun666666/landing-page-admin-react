@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 // material
 import { Menu, Button, MenuItem, Typography } from '@mui/material';
 // component
@@ -14,9 +14,9 @@ const SORT_BY_OPTIONS = [
 ];
 
 export default function ShopProductSort() {
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState<any>(null);
 
-  const handleOpen = (event) => {
+  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setOpen(event.currentTarget);
   };
 

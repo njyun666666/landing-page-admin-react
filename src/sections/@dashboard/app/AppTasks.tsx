@@ -79,11 +79,11 @@ function TaskItem({
 }: {
   task: ITask;
   checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  onChange: (event: React.ChangeEvent<HTMLElement>, checked: boolean) => void;
 }) {
   const [open, setOpen] = useState<any>(null);
 
-  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setOpen(event.currentTarget);
   };
 

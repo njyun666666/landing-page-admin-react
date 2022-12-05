@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // material
 import {
   Box,
@@ -49,13 +49,21 @@ export const FILTER_COLOR_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-ShopFilterSidebar.propTypes = {
-  isOpenFilter: PropTypes.bool,
-  onOpenFilter: PropTypes.func,
-  onCloseFilter: PropTypes.func,
-};
+// ShopFilterSidebar.propTypes = {
+//   isOpenFilter: PropTypes.bool,
+//   onOpenFilter: PropTypes.func,
+//   onCloseFilter: PropTypes.func,
+// };
 
-export default function ShopFilterSidebar({ isOpenFilter, onOpenFilter, onCloseFilter }) {
+export default function ShopFilterSidebar({
+  isOpenFilter,
+  onOpenFilter,
+  onCloseFilter,
+}: {
+  isOpenFilter: boolean;
+  onOpenFilter: () => void;
+  onCloseFilter: () => void;
+}) {
   return (
     <>
       <Button disableRipple color="inherit" endIcon={<Iconify icon="ic:round-filter-list" />} onClick={onOpenFilter}>
@@ -110,9 +118,9 @@ export default function ShopFilterSidebar({ isOpenFilter, onOpenFilter, onCloseF
                 Colors
               </Typography>
               <ColorManyPicker
-                name="colors"
+                // name="colors"
                 colors={FILTER_COLOR_OPTIONS}
-                onChecked={(color) => [].includes(color)}
+                onChecked={(color) => ([] as string[]).includes(color)}
                 sx={{ maxWidth: 38 * 4 }}
               />
             </div>

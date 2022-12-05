@@ -1,15 +1,16 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // material
 import { Grid } from '@mui/material';
 import ShopProductCard from './ProductCard';
+import { IProduct } from 'src/types/product';
 
 // ----------------------------------------------------------------------
 
-ProductList.propTypes = {
-  products: PropTypes.array.isRequired
-};
+// ProductList.propTypes = {
+//   products: PropTypes.array.isRequired,
+// };
 
-export default function ProductList({ products, ...other }) {
+export default function ProductList({ products, ...other }: { products: IProduct[] }) {
   return (
     <Grid container spacing={3} {...other}>
       {products.map((product) => (
