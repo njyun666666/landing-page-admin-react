@@ -5,10 +5,11 @@ import { styled } from '@mui/material/styles';
 import { Autocomplete, InputAdornment, Popper, TextField } from '@mui/material';
 // components
 import Iconify from '../../../components/Iconify';
+import { IBlogPost } from 'src/types/post';
 
 // ----------------------------------------------------------------------
 
-const PopperStyle = styled((props) => <Popper placement="bottom-start" {...props} />)({
+const PopperStyle = styled((props) => <Popper open={false} placement="bottom-start" {...props} />)({
   width: '280px !important',
 });
 
@@ -18,7 +19,7 @@ BlogPostsSearch.propTypes = {
   posts: PropTypes.array.isRequired,
 };
 
-export default function BlogPostsSearch({ posts }) {
+export default function BlogPostsSearch({ posts }: { posts: IBlogPost[] }) {
   return (
     <Autocomplete
       sx={{ width: 280 }}

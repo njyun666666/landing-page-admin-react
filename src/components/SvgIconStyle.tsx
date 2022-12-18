@@ -1,14 +1,13 @@
-import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import { Box, BoxProps, SxProps, Theme } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-SvgIconStyle.propTypes = {
-  src: PropTypes.string.isRequired,
-  sx: PropTypes.object,
-};
+export interface BoxSpanProps extends BoxProps {
+  src: string;
+  sx?: SxProps<Theme>;
+}
 
-export default function SvgIconStyle({ src, sx }) {
+export default function SvgIconStyle({ src, sx }: BoxSpanProps) {
   return (
     <Box
       component="span"

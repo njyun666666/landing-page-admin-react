@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
@@ -9,6 +9,7 @@ import { fShortenNumber } from '../../../utils/formatNumber';
 //
 import SvgIconStyle from '../../../components/SvgIconStyle';
 import Iconify from '../../../components/Iconify';
+import { IBlogPost } from 'src/types/post';
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +24,7 @@ const TitleStyle = styled(Link)({
   WebkitLineClamp: 2,
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
-});
+}) as typeof Link;
 
 const AvatarStyle = styled(Avatar)(({ theme }) => ({
   zIndex: 9,
@@ -52,12 +53,12 @@ const CoverImgStyle = styled('img')({
 
 // ----------------------------------------------------------------------
 
-BlogPostCard.propTypes = {
-  post: PropTypes.object.isRequired,
-  index: PropTypes.number,
-};
+// BlogPostCard.propTypes = {
+//   post: PropTypes.object.isRequired,
+//   index: PropTypes.number,
+// };
 
-export default function BlogPostCard({ post, index }) {
+export default function BlogPostCard({ post, index }: { post: IBlogPost; index?: number }) {
   const { cover, title, view, comment, share, author, createdAt } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;

@@ -7,10 +7,11 @@ import Iconify from '../components/Iconify';
 import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
 // mock
 import POSTS from '../_mock/blog';
+import { IBlogPostsSortOption } from 'src/types/post';
 
 // ----------------------------------------------------------------------
 
-const SORT_OPTIONS = [
+const SORT_OPTIONS: IBlogPostsSortOption[] = [
   { value: 'latest', label: 'Latest' },
   { value: 'popular', label: 'Popular' },
   { value: 'oldest', label: 'Oldest' },
