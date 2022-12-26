@@ -1,5 +1,5 @@
 // @mui
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { alpha, styled } from '@mui/material/styles';
 import { Card, SxProps, Theme, Typography } from '@mui/material';
 // utils

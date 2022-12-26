@@ -81,9 +81,9 @@ function TaskItem({
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLElement>, checked: boolean) => void;
 }) {
-  const [open, setOpen] = useState<any>(null);
+  const [open, setOpen] = useState<HTMLButtonElement | null>(null);
 
-  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setOpen(event.currentTarget);
   };
 
@@ -179,7 +179,7 @@ function MoreMenuButton({
   onClose,
 }: {
   actions: React.ReactNode;
-  open: boolean;
+  open: HTMLButtonElement | null;
   onOpen: React.MouseEventHandler<HTMLButtonElement>;
   onClose: any;
 }) {
