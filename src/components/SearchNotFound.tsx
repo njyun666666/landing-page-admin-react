@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // material
 import { Paper, Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-SearchNotFound.propTypes = {
-  searchQuery: PropTypes.string,
-};
+// SearchNotFound.propTypes = {
+//   searchQuery: PropTypes.string,
+// };
 
 export default function SearchNotFound({ searchQuery = '', ...other }) {
   return (

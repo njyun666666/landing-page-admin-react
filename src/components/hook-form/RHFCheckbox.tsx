@@ -1,20 +1,28 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // form
 import { useFormContext, Controller } from 'react-hook-form';
 // @mui
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Checkbox, FormControlLabel, FormControlLabelProps, FormGroup } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
-RHFCheckbox.propTypes = {
-  name: PropTypes.string.isRequired,
-};
+// RHFCheckbox.propTypes = {
+//   name: PropTypes.string.isRequired,
+// };
 
-export function RHFCheckbox({ name, ...other }) {
+interface RHFCheckboxProps {
+  name: string;
+  label: React.ReactNode;
+  [key: string]: React.ReactNode;
+}
+
+export function RHFCheckbox({ name, label, ...other }: RHFCheckboxProps) {
   const { control } = useFormContext();
 
   return (
     <FormControlLabel
+      {...other}
+      label={label}
       control={
         <Controller
           name={name}
@@ -22,19 +30,23 @@ export function RHFCheckbox({ name, ...other }) {
           render={({ field }) => <Checkbox {...field} checked={field.value} />}
         />
       }
-      {...other}
     />
   );
 }
 
 // ----------------------------------------------------------------------
 
-RHFMultiCheckbox.propTypes = {
-  name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-};
+// RHFMultiCheckbox.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   options: PropTypes.array.isRequired,
+// };
 
-export function RHFMultiCheckbox({ name, options, ...other }) {
+interface RHFMultiCheckboxPoprs extends FormControlLabelProps {
+  name: string;
+  options: any[];
+}
+
+export function RHFMultiCheckbox<T extends RHFMultiCheckboxPoprs>({ name, options, ...other }: T) {
   const { control } = useFormContext();
 
   return (
@@ -42,13 +54,16 @@ export function RHFMultiCheckbox({ name, options, ...other }) {
       name={name}
       control={control}
       render={({ field }) => {
-        const onSelected = (option) =>
-          field.value.includes(option) ? field.value.filter((value) => value !== option) : [...field.value, option];
+        const onSelected = (option: any[]) =>
+          field.value.includes(option)
+            ? field.value.filter((value: any) => value !== option)
+            : [...field.value, option];
 
         return (
           <FormGroup>
             {options.map((option) => (
               <FormControlLabel
+                {...other}
                 key={option.value}
                 control={
                   <Checkbox
@@ -57,7 +72,6 @@ export function RHFMultiCheckbox({ name, options, ...other }) {
                   />
                 }
                 label={option.label}
-                {...other}
               />
             ))}
           </FormGroup>

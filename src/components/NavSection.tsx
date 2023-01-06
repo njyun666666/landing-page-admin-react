@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
+import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton, Button } from '@mui/material';
 //
 import Iconify from './Iconify';
+import { INavConfig } from 'src/types/nav';
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props
   textTransform: 'capitalize',
   color: theme.palette.text.secondary,
   borderRadius: theme.shape.borderRadius,
-}));
+})) as typeof ListItemButton;
 
 const ListItemIconStyle = styled(ListItemIcon)({
   width: 22,
@@ -29,12 +30,12 @@ const ListItemIconStyle = styled(ListItemIcon)({
 
 // ----------------------------------------------------------------------
 
-NavItem.propTypes = {
-  item: PropTypes.object,
-  active: PropTypes.func,
-};
+// NavItem.propTypes = {
+//   item: PropTypes.object,
+//   active: PropTypes.func,
+// };
 
-function NavItem({ item, active }) {
+function NavItem({ item, active }: { item: INavConfig; active: (path: string) => boolean }) {
   const theme = useTheme();
 
   const isActiveRoot = active(item.path);
@@ -61,6 +62,7 @@ function NavItem({ item, active }) {
   if (children) {
     return (
       <>
+        <Button></Button>
         <ListItemStyle
           onClick={handleOpen}
           sx={{
@@ -135,14 +137,14 @@ function NavItem({ item, active }) {
   );
 }
 
-NavSection.propTypes = {
-  navConfig: PropTypes.array,
-};
+// NavSection.propTypes = {
+//   navConfig: PropTypes.array,
+// };
 
-export default function NavSection({ navConfig, ...other }) {
+export default function NavSection({ navConfig, ...other }: { navConfig: INavConfig[] }) {
   const { pathname } = useLocation();
 
-  const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
+  const match = (path: string) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 
   return (
     <Box {...other}>

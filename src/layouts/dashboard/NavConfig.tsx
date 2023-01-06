@@ -1,11 +1,12 @@
 // component
+import { INavConfig } from 'src/types/nav';
 import Iconify from '../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
 const getIcon = (name: string) => <Iconify icon={name} width={22} height={22} />;
 
-const navConfig = [
+const navConfig: INavConfig[] = [
   {
     title: 'dashboard',
     path: '/dashboard/app',

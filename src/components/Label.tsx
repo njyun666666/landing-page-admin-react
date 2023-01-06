@@ -1,26 +1,34 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // @mui
 import { alpha, styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, SxProps, Theme } from '@mui/material';
+import { ColorProps, VariantProps } from 'src/types/style';
 
 // ----------------------------------------------------------------------
 
-const RootStyle = styled('span')(({ theme, ownerState }) => {
+interface RootStyleProps {
+  ownerState: {
+    color: ColorProps;
+    variant: VariantProps;
+  };
+}
+
+const RootStyle = styled('span')<RootStyleProps>(({ theme, ownerState }) => {
   const isLight = theme.palette.mode === 'light';
   const { color, variant } = ownerState;
 
-  const styleFilled = (color) => ({
+  const styleFilled = (color: ColorProps) => ({
     color: theme.palette[color].contrastText,
     backgroundColor: theme.palette[color].main,
   });
 
-  const styleOutlined = (color) => ({
+  const styleOutlined = (color: ColorProps) => ({
     color: theme.palette[color].main,
     backgroundColor: 'transparent',
     border: `1px solid ${theme.palette[color].main}`,
   });
 
-  const styleGhost = (color) => ({
+  const styleGhost = (color: ColorProps) => ({
     color: theme.palette[color][isLight ? 'dark' : 'light'],
     backgroundColor: alpha(theme.palette[color].main, 0.16),
   });
@@ -64,16 +72,25 @@ const RootStyle = styled('span')(({ theme, ownerState }) => {
 
 // ----------------------------------------------------------------------
 
-Label.propTypes = {
-  children: PropTypes.node,
-  startIcon: PropTypes.node,
-  endIcon: PropTypes.node,
-  color: PropTypes.oneOf(['default', 'primary', 'secondary', 'info', 'success', 'warning', 'error']),
-  variant: PropTypes.oneOf(['filled', 'outlined', 'ghost']),
-  sx: PropTypes.object,
-};
+// Label.propTypes = {
+//   children: PropTypes.node,
+//   startIcon: PropTypes.node,
+//   endIcon: PropTypes.node,
+//   color: PropTypes.oneOf(['default', 'primary', 'secondary', 'info', 'success', 'warning', 'error']),
+//   variant: PropTypes.oneOf(['filled', 'outlined', 'ghost']),
+//   sx: PropTypes.object,
+// };
 
-export default function Label({ children, color = 'default', variant = 'ghost', startIcon, endIcon, sx }) {
+interface LabelProps {
+  children?: React.ReactNode;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  color?: ColorProps;
+  variant?: VariantProps;
+  sx?: SxProps<Theme>;
+}
+
+export default function Label({ children, color = 'default', variant = 'ghost', startIcon, endIcon, sx }: LabelProps) {
   const style = {
     width: 16,
     height: 16,
