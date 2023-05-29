@@ -9,7 +9,6 @@ import Backdrop from './Backdrop';
 import Typography from './Typography';
 import CssBaseline from './CssBaseline';
 import Autocomplete from './Autocomplete';
-// eslint-disable-next-line
 import { Theme } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------

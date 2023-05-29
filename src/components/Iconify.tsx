@@ -2,7 +2,6 @@
 import { Icon } from '@iconify/react';
 // @mui
 import { Box } from '@mui/material';
-// eslint-disable-next-line
 import { IconifyProps } from 'src/types/iconify';
 
 // ----------------------------------------------------------------------

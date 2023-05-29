@@ -24,7 +24,6 @@ import { fToNow } from '../../utils/formatTime';
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import MenuPopover from '../../components/MenuPopover';
-// eslint-disable-next-line
 import { INotificationItem } from 'src/types/notifiaction';
 
 // ----------------------------------------------------------------------

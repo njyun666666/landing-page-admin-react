@@ -5,28 +5,34 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
-import { Link, Stack, IconButton, InputAdornment } from '@mui/material';
+import { Stack, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/Iconify';
-import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
+import { FormProvider, RHFTextField } from '../../../components/hook-form';
+
+import { token } from '../auth';
+import { LoginModel, loginAPI } from 'src/services/login';
+import { useDispatch } from 'react-redux';
+import { login } from 'src/reducers/userSlice';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    email: Yup.string().email('請填入有效Email').required('請填入Email'),
+    password: Yup.string().required('請填入密碼'),
   });
 
   const defaultValues = {
-    email: '',
-    password: '',
-    remember: true,
+    email: 'admin@example.com',
+    password: 'Demo123456',
+    // remember: true,
   };
 
   const methods = useForm({
@@ -39,18 +45,21 @@ export default function LoginForm() {
     formState: { isSubmitting },
   } = methods;
 
-  const onSubmit = async () => {
-    navigate('/dashboard', { replace: true });
+  const onSubmit = async (data: LoginModel) => {
+    const result = await loginAPI.login(data);
+    token.set(result.data);
+    dispatch(login());
+    navigate('/dashboard/app', { replace: true });
   };
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={3}>
-        <RHFTextField name="email" label="Email address" />
+      <Stack spacing={3} mb={3}>
+        <RHFTextField name="email" label="Email" />
 
         <RHFTextField
           name="password"
-          label="Password"
+          label="密碼"
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -63,13 +72,13 @@ export default function LoginForm() {
           }}
         />
       </Stack>
-
+      {/* 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
         <RHFCheckbox name="remember" label="Remember me" />
         <Link variant="subtitle2" underline="hover">
           Forgot password?
         </Link>
-      </Stack>
+      </Stack> */}
 
       <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
         Login

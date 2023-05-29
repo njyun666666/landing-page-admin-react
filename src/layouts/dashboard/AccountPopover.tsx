@@ -5,8 +5,7 @@ import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@mui/material';
 // components
 import MenuPopover from '../../components/MenuPopover';
-// mocks_
-import account from '../../_mock/account';
+import { token } from 'src/sections/auth/auth';
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +42,12 @@ export default function AccountPopover() {
     setOpen(null);
   };
 
+  const onLogout = () => {
+    token.logout();
+  };
+
+  const account = token.payload();
+
   return (
     <>
       <IconButton
@@ -63,7 +68,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={account?.photoURL || '/static/mock-images/avatars/avatar_default.jpg'} alt="photoURL" />
       </IconButton>
 
       <MenuPopover
@@ -82,11 +87,11 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {account?.sub}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+          {/* <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {account.email}
-          </Typography>
+          </Typography> */}
         </Box>
 
         <Divider sx={{ borderStyle: 'dashed' }} />
@@ -101,7 +106,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={onLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>
