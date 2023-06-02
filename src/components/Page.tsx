@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import React, { forwardRef } from 'react';
 // @mui
 import { Box } from '@mui/material';
+import { SnackbarProvider } from 'notistack';
 
 // ----------------------------------------------------------------------
 
@@ -12,13 +13,15 @@ const Page = forwardRef(
   ) => (
     <>
       <Helmet>
-        <title>{`${title} | Minimal-UI`}</title>
+        <title>{`${title} | LandingPage Admin`}</title>
         {meta}
       </Helmet>
 
-      <Box ref={ref} {...other}>
-        {children}
-      </Box>
+      <SnackbarProvider autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Box ref={ref} {...other}>
+          {children}
+        </Box>
+      </SnackbarProvider>
     </>
   )
 );
