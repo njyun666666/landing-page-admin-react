@@ -1,3 +1,4 @@
+import './i18n/config';
 // routes
 import Router from './routes';
 // theme

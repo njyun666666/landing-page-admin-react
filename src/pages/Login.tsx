@@ -9,6 +9,7 @@ import Page from '../components/Page';
 import Logo from '../components/Logo';
 // sections
 import { LoginForm } from '../sections/auth/login';
+import { useTranslation } from 'react-i18next';
 // import AuthSocial from '../sections/auth/AuthSocial';
 
 // ----------------------------------------------------------------------
@@ -57,8 +58,9 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Login() {
-  const smUp = useResponsive('up', 'sm');
+  const { t } = useTranslation();
 
+  // const smUp = useResponsive('up', 'sm');
   const mdUp = useResponsive('up', 'md');
 
   return (
@@ -89,7 +91,7 @@ export default function Login() {
         <Container maxWidth="sm">
           <ContentStyle>
             <Typography variant="h4" gutterBottom sx={{ mb: 5 }}>
-              LandingPage後台
+              {t('web_site_title')}
             </Typography>
 
             <LoginForm />

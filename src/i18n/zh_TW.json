@@ -1,0 +1,8 @@
+{
+  "web_site_title": "LandingPage 後台",
+  "required_field": "請填入 {{field}}",
+  "valid_field": "請填入有效 {{field}}",
+  "email": "Email",
+  "password": "密碼",
+  "login": "登入"
+}

@@ -15,18 +15,22 @@ import { token } from '../auth';
 import { LoginModel, loginAPI } from 'src/services/login';
 import { useDispatch } from 'react-redux';
 import { login } from 'src/reducers/userSlice';
+import { useTranslation } from 'react-i18next';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('請填入有效Email').required('請填入Email'),
-    password: Yup.string().required('請填入密碼'),
+    email: Yup.string()
+      .email(t('valid_field', { field: t('email') }))
+      .required(t('required_field', { field: t('email') })),
+    password: Yup.string().required(t('required_field', { field: t('password') })),
   });
 
   const defaultValues = {
@@ -55,11 +59,11 @@ export default function LoginForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3} mb={3}>
-        <RHFTextField name="email" label="Email" />
+        <RHFTextField name="email" label={t('email')} />
 
         <RHFTextField
           name="password"
-          label="密碼"
+          label={t('password')}
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -81,7 +85,7 @@ export default function LoginForm() {
       </Stack> */}
 
       <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-        Login
+        {t('login')}
       </LoadingButton>
     </FormProvider>
   );
