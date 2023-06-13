@@ -1,5 +1,5 @@
 import jwtDecode, { JwtPayload } from 'jwt-decode';
-import { logout } from 'src/reducers/userSlice';
+import { login, logout } from 'src/reducers/userSlice';
 import { LoginViewModel, loginAPI } from 'src/services/login';
 import { store } from 'src/store';
 
@@ -21,6 +21,13 @@ export const token = {
       access_token: window.localStorage.getItem(access_token),
       refresh_token: window.localStorage.getItem(refresh_token),
     } as LoginViewModel;
+  },
+  updateStatus: () => {
+    if (token.payload() == undefined) {
+      token.logout();
+    } else {
+      store.dispatch(login());
+    }
   },
   logout: () => {
     window.localStorage.removeItem(access_token);

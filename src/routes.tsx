@@ -9,10 +9,12 @@ import Register from './pages/Register';
 import DashboardApp from './pages/DashboardApp';
 import { useSelector } from 'react-redux';
 import { selectIsLogin } from './reducers/userSlice';
+import { token } from './sections/auth/auth';
 
 // ----------------------------------------------------------------------
 
 const GuardedRoute = () => {
+  token.updateStatus();
   const isLogin = useSelector(selectIsLogin);
 
   if (isLogin) {
