@@ -17,4 +17,5 @@ export interface RefreshTokenModel {
 export const loginAPI = {
   login: (data: LoginModel) => ajax.post<LoginViewModel>('/api/Login', data),
   refresh: (data: RefreshTokenModel) => ajax.post<LoginViewModel>('/api/Login/RefreshToken', data),
+  test: () => ajax.get('/api/TbPages/5'),
 };
